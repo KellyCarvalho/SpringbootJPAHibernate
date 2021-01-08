@@ -6,6 +6,7 @@ import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.springbootjpahibernate.listaPedidos.entities.pk.OrdemItemPk;
 @Entity
 @Table(name ="tb_order_item")
@@ -13,17 +14,25 @@ public class OrderItem implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	@EmbeddedId
-	private OrdemItemPk id;
+	private OrdemItemPk id = new OrdemItemPk();//deve se instaciar ou vai dar o erro nullPointerException
 	private Integer quantity;
 	private Double price;
 	
+	
+	
+	public OrderItem() {
+	
+	}
+
 	public OrderItem(Order order, Product product, Integer quantity, Double price) {
+	   super();
 	    id.setOrder(order);
 	    id.setProduct(product);
 		this.quantity = quantity;
 		this.price = price;
 	}
-	
+
+	@JsonIgnore
 	public Order getOrder() {
 		return id.getOrder();
 	}

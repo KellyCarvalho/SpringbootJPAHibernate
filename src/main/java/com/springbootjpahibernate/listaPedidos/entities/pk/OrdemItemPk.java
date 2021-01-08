@@ -6,6 +6,7 @@ import javax.persistence.Embeddable;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.springbootjpahibernate.listaPedidos.entities.Order;
 import com.springbootjpahibernate.listaPedidos.entities.Product;
 
@@ -19,7 +20,7 @@ public class OrdemItemPk implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "product_id")
 	private Product product;
-
+	@JsonIgnore
 	public Order getOrder() {
 		return order;
 	}
